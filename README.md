@@ -95,7 +95,9 @@ Here is a basic analysis pipeline:
 
 First, normalizing and scaling the data. This normalized expression measurements and scales the expression of each gene.      
 `so <- NormalizeData(so)     
+
 all.genes <- rownames(so)      
+
 so <- ScaleData(so, features = all.genes)`
 
 Find variable features. From here, you can also examine top variable genes if you'd like, but this step is necessary for downstream analysis.    
