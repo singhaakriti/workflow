@@ -94,8 +94,8 @@ You can adjust for the amount of cut off based on your sample set. Note that thi
 Here is a basic analysis pipeline:   
 
 First, normalizing and scaling the data. This normalized expression measurements and scales the expression of each gene.      
-`so <- NormalizeData(so)
-all.genes <- rownames(so)
+`so <- NormalizeData(so)     
+all.genes <- rownames(so)      
 so <- ScaleData(so, features = all.genes)`
 
 Find variable features. From here, you can also examine top variable genes if you'd like, but this step is necessary for downstream analysis.    
@@ -109,26 +109,26 @@ You can visualize the PCA:
 Determine dimensionality of dataset. There are two ways to do this: jack straw plot and elbow plot. The jack straw plot is more computationally expensive compared to the elbow plot. If you have a large dataset, the jack straw plot can take upwards of 30 minutes to run. Examining these metrics is useful for determining the optimal number of clusters in your dataset.
 
 Jack straw:   
-`so <- JackStraw(so, num.replicate = 100)
-so <- ScoreJackStraw(so, dims = 1:20)
+`so <- JackStraw(so, num.replicate = 100)      
+so <- ScoreJackStraw(so, dims = 1:20)      
 JackStrawPlot(so, dims = 1:15)`
 
 Elbow:    
 `ElbowPlot(so)`
 
 Find neighbors and clusters. Here, you can optimize the "dims" and "resolution" to get the optimal number of clusters as defined by the previous step. This "optimal" number is not a given, it will likely change once you explore into the contents of the clusters.   
-`so <- FindNeighbors(so, dims = 1:10)
+`so <- FindNeighbors(so, dims = 1:10)       
 so <- FindClusters(so, resolution = 0.5)`
 
 Run UMAP and visualize:
-`so <- RunUMAP(so, dims = 1:10)
+`so <- RunUMAP(so, dims = 1:10)       
 DimPlot(so)`
 
 ### Cluster identification
 At this stage, you will have a UMAP with clusters. Now the next question is, what are these clusters? We can do cluster identification in two ways: manually or algorithmically (but if you decide to choose algorithmically, you should always double check manually).
 
 1. Manually: Find the top differentially expressed genes for each cluster, and manually identify the cell type those genes belong to. To do this:
-`markers1 <- FindMarkers(so, ident.1 = 1, min.pct = 0.25)
+`markers1 <- FindMarkers(so, ident.1 = 1, min.pct = 0.25)      
 head(markers1, n = 10)`
 
 Here, I am examining the top ten markers (n = 10) for the cluster #1 (ident.1 = 1). Similarily, you can get the top markers for every cluster, and you can adjust the number of markers you want to visualize as well. Note that this step can take time to run, especially if you have a large sample set. 
