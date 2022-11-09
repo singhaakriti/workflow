@@ -141,6 +141,8 @@ Now, you have the top differentially expressed genes. I would suggest using the 
    3. [Azimuth](https://azimuth.hubmapconsortium.org/)
    I prefer this for scATAC data. For Azimuth, you'll need to install and load it in: `library(Azimuth)` and after creating the seurat object, `so <- RunAzimuth(so, reference = "lungref")`. 
 
+### FeaturePlot
+FeaturePlot(object = so, features = c("gene"))
 
 ### Re-introduction of original identity
 Once you know what cluster is what cell type, you can re-introduce the original identiy of the cell. This can mean, bringing back whether that cell is a "diseased" or "healthy" cell. To do this,    
